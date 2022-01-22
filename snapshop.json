@@ -1,0 +1,11 @@
+"74": {
+    "key": "74",
+    "name": "IDChain",
+    "shortName": "IDChain",
+    "chainId": 74,
+    "network": "mainnet",
+    "multicall": "0x41d289c966D51342A515A19dE9c27d16079c94E0",
+    "rpc": ["https://idchain.songadao.org/rpc"],
+    "ws": ["wss://idchain.songadao.org/ws"],
+    "explorer": "https://explorer.idchain.one/"
+}

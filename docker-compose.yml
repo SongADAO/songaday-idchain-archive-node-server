@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+    idchain:
+        image: 'alanparty/idchain-archive-node:0.0.1'
+        volumes:
+            - './idchain_full/:/idchain'
+        environment:
+            - 'EXTRA_OPTS=--gcmode archive --rpcapi eth,net,web3,txpool'
+            - SYNCMODE=full
+        ports:
+            # - '8545:8545'
+            # - '8546:8546'
+            - '30329:30329'
+            - '30329:30329/udp'
+        restart: unless-stopped
+
+    # idchain:
+    #     image: 'alanparty/idchain-archive-node:0.0.1'
+    #     volumes:
+    #         - './idchain_light/:/idchain'
+    #     environment:
+    #         - 'EXTRA_OPTS=--rpcapi eth,net,web3,txpool'
+    #         - SYNCMODE=light
+    #     ports:
+    #         # - '8545:8545'
+    #         # - '8546:8546'
+    #         - '30329:30329'
+    #         - '30329:30329/udp'
+    #     restart: unless-stopped
+
+    nginx:
+        image: 'nginx:1.21'
+        volumes:
+            - ./nginx/conf/:/etc/nginx/conf.d/:ro
+            - ./nginx/dhparam/:/etc/nginx/dhparam/:ro
+            - ./nginx/www/html/:/var/www/html/:ro
+            - ./certbot/www/:/var/www/certbot/:ro
+            - ./certbot/conf/:/etc/nginx/ssl/:ro
+        ports:
+            - '80:80'
+            - '443:443'
+        restart: unless-stopped
+
+    certbot:
+        image: certbot/certbot:v1.22.0
+        volumes:
+            - ./certbot/logs/:/var/log/letsencrypt/:rw
+            - ./certbot/www/:/var/www/certbot/:rw
+            - ./certbot/conf/:/etc/letsencrypt/:rw
+
+# volumes:
+    # idchain: {}
