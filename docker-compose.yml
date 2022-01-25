@@ -34,7 +34,9 @@ services:
         volumes:
             - ./nginx/conf/:/etc/nginx/conf.d/:ro
             - ./nginx/dhparam/:/etc/nginx/dhparam/:ro
+            - ./nginx/htpasswd/:/etc/nginx/htpasswd/:rw
             - ./nginx/www/html/:/var/www/html/:ro
+            - ./nginx/www/idchain-registration/:/var/www/idchain-registration/:ro
             - ./certbot/www/:/var/www/certbot/:ro
             - ./certbot/conf/:/etc/nginx/ssl/:ro
         ports:
