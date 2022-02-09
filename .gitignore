@@ -1,3 +1,8 @@
 .env
 .env.idchain_registration_relay
-nginx/www/idchain-registration
+certbot/
+idchain_full/
+idchain_light/
+nginx/dhparam/
+nginx/htpasswd/
+nginx/www/idchain-registration/
