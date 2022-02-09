@@ -30,6 +30,12 @@ services:
     #         - '30329:30329/udp'
     #     restart: unless-stopped
 
+    idchain_registration_relay:
+        image: 'songadao/idchain-registration-relay:latest'
+        env_file:
+            - .env.idchain_registration_relay
+        restart: unless-stopped
+
     nginx:
         image: 'nginx:1.21'
         volumes:
