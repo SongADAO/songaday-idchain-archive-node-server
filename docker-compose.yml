@@ -44,6 +44,7 @@ services:
             - ./nginx/htpasswd/:/etc/nginx/htpasswd/:rw
             - ./nginx/www/html/:/var/www/html/:ro
             - ./nginx/www/idchain-registration/:/var/www/idchain-registration/:ro
+            - ./nginx/www/idchain-registration-simple/:/var/www/idchain-registration-simple/:ro
             - ./certbot/www/:/var/www/certbot/:ro
             - ./certbot/conf/:/etc/nginx/ssl/:ro
         ports:
