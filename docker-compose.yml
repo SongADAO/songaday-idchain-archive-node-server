@@ -3,6 +3,7 @@ version: '3.7'
 services:
     idchain:
         image: 'alanparty/idchain-archive-node:0.0.1'
+        # image: 'songadao/idchain-archive-node:latest'
         volumes:
             - './idchain_full/:/idchain'
         environment:
@@ -16,7 +17,7 @@ services:
         restart: unless-stopped
 
     # idchain:
-    #     image: 'alanparty/idchain-archive-node:0.0.1'
+    #     image: 'songadao/idchain-archive-node:latest'
     #     volumes:
     #         - './idchain_light/:/idchain'
     #     environment:
