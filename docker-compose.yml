@@ -30,10 +30,10 @@ services:
     #         - '30329:30329/udp'
     #     restart: unless-stopped
 
-    idchain_registration_relay:
-        image: 'songadao/idchain-registration-relay:latest'
+    brightid_registration_relay:
+        image: 'songadao/brightid-registration-relay:latest'
         env_file:
-            - .env.idchain_registration_relay
+            - .env.brightid_registration_relay
         restart: unless-stopped
 
     nginx:
@@ -44,7 +44,7 @@ services:
             - ./nginx/htpasswd/:/etc/nginx/htpasswd/:rw
             - ./nginx/www/html/:/var/www/html/:ro
             - ./nginx/www/idchain-registration/:/var/www/idchain-registration/:ro
-            - ./nginx/www/idchain-registration-simple/:/var/www/idchain-registration-simple/:ro
+            - ./nginx/www/brightid-registration/:/var/www/brightid-registration/:ro
             - ./certbot/www/:/var/www/certbot/:ro
             - ./certbot/conf/:/etc/nginx/ssl/:ro
         ports:

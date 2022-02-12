@@ -1,5 +1,5 @@
 .env
-.env.idchain_registration_relay
+.env.brightid_registration_relay
 certbot/
 idchain_full/
 idchain_light/
