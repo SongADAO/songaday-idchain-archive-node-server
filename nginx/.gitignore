@@ -2,4 +2,6 @@
 certbot/
 nginx/dhparam/
 nginx/htpasswd/
+nginx/www/brightid-registration/
 nginx/www/idchain-registration/
+nginx/www/idchain-registration-simple/
