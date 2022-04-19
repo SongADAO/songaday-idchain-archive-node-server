@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+    idchain:
+        image: 'songadao/idchain-node:1.0'
+        volumes:
+            - './idchain_full/:/idchain'
+        environment:
+            - 'EXTRA_OPTS=--gcmode archive --http.api eth,net,web3,txpool'
+            - 'SYNCMODE=full'
+        ports:
+            # - '8545:8545'
+            # - '8546:8546'
+            - '30329:30329'
+            - '30329:30329/udp'
+        restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: sad_external_http

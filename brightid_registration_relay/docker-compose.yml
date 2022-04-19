@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+    brightid_registration_relay:
+        image: 'songadao/brightid-registration-relay:1.0'
+        env_file:
+            - .env
+        restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: sad_external_http

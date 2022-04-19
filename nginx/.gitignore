@@ -1,0 +1,5 @@
+.env
+certbot/
+nginx/dhparam/
+nginx/htpasswd/
+nginx/www/idchain-registration/

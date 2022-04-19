@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+    nginx:
+        image: 'nginx:1.21'
+        volumes:
+            - ./nginx/conf/:/etc/nginx/conf.d/:ro
+            - ./nginx/dhparam/:/etc/nginx/dhparam/:ro
+            - ./nginx/htpasswd/:/etc/nginx/htpasswd/:rw
+            - ./nginx/www/html/:/var/www/html/:ro
+            - ./nginx/www/idchain-registration/:/var/www/idchain-registration/:ro
+            - ./nginx/www/brightid-registration/:/var/www/brightid-registration/:ro
+            - ./certbot/www/:/var/www/certbot/:ro
+            - ./certbot/conf/:/etc/nginx/ssl/:ro
+        ports:
+            - '80:80'
+            - '443:443'
+        restart: unless-stopped
+
+    certbot:
+        image: certbot/certbot:v1.22.0
+        volumes:
+            - ./certbot/logs/:/var/log/letsencrypt/:rw
+            - ./certbot/www/:/var/www/certbot/:rw
+            - ./certbot/conf/:/etc/letsencrypt/:rw
+
+networks:
+  default:
+    external:
+      name: sad_external_http
