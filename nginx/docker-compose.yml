@@ -25,6 +25,6 @@ services:
             - ./certbot/conf/:/etc/letsencrypt/:rw
 
 networks:
-  default:
-    external:
-      name: sad_external_http
+    default:
+        name: sad_external_http
+        external: true
