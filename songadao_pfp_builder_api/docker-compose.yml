@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     songadao_pfp_builder_api:
-        image: 'songadao/pfp_builder_api:1.0'
+        image: 'songadao/pfpbuilderapi:1.0'
         volumes:
             - './pfp_builder_resources/:/app/pfp_builder_resources'
         env_file:
