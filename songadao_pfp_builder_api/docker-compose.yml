@@ -4,7 +4,7 @@ services:
     songadao_pfp_builder_api:
         image: 'songadao/pfpbuilderapi:1.0'
         volumes:
-            - './pfp_builder_resources/:/app/pfp_builder_resources'
+            - './pfp_builder_resources/:/app/app/pfp_builder_resources'
         env_file:
             - .env
         restart: unless-stopped
