@@ -49,8 +49,12 @@ services:
             POSTGRES_USER: graph-node
             POSTGRES_DB: graph-node
         volumes:
-            - ./data/postgres:/var/lib/postgresql/data
+            - pgdata:/var/lib/postgresql/data
         restart: unless-stopped
+
+volumes:
+    # ipfs:
+    pgdata:
 
 networks:
     default:
