@@ -48,7 +48,6 @@ services:
         environment:
             POSTGRES_USER: graph-node
             POSTGRES_DB: graph-node
-            PGDATA: "/data/postgres"
         volumes:
             - ./data/postgres:/var/lib/postgresql/data
         restart: unless-stopped
