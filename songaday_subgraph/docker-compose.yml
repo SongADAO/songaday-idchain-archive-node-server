@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+    graph-cli:
+        build: ./graph-cli
+    graph-node:
+        image: graphprotocol/graph-node
+        # ports:
+        #     - '8000:8000'
+        #     - '8001:8001'
+        #     - '8020:8020'
+        #     - '8030:8030'
+        #     - '8040:8040'
+        depends_on:
+            - ipfs
+            - postgres
+        # extra_hosts:
+        #     - host.docker.internal:host-gateway
+        env_file:
+            - .env
+        environment:
+            postgres_host: postgres
+            postgres_user: graph-node
+            postgres_db: graph-node
+            ipfs: 'ipfs:5001'
+            GRAPH_LOG: info
+        restart: unless-stopped
+    ipfs:
+        image: ipfs/go-ipfs:v0.10.0
+        # ports:
+        #     - '5001:5001'
+        volumes:
+            - ./data/ipfs:/data/ipfs
+        restart: unless-stopped
+    postgres:
+        image: postgres
+        # ports:
+        #     - '5432:5432'
+        command:
+            [
+                "postgres",
+                "-cshared_preload_libraries=pg_stat_statements"
+            ]
+        env_file:
+            - .env
+        environment:
+            POSTGRES_USER: graph-node
+            POSTGRES_DB: graph-node
+            PGDATA: "/data/postgres"
+        volumes:
+            - ./data/postgres:/var/lib/postgresql/data
+        restart: unless-stopped
+
+networks:
+    default:
+        name: sad_external_http
+        external: true
