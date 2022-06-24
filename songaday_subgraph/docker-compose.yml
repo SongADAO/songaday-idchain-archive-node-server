@@ -3,6 +3,8 @@ version: '3.7'
 services:
     graph-cli:
         build: ./graph-cli
+        volumes:
+            - ./data/graph-cli/generated:/usr/src/app/generated
     graph-node:
         image: graphprotocol/graph-node
         # ports:
