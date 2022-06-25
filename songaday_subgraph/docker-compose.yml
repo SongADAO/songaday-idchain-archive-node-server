@@ -26,10 +26,8 @@ services:
             postgres_db: graph-node
             ipfs: 'ipfs:5001'
             GRAPH_LOG: info
-            # ETHEREUM_BLOCK_BATCH_SIZE: 1
+            GRAPH_ALLOW_NON_DETERMINISTIC_IPFS: "true"
             GRAPH_ETHEREUM_BLOCK_INGESTOR_MAX_CONCURRENT_JSON_RPC_CALLS_FOR_TXN_RECEIPTS: 1
-            # GRAPH_ETHEREUM_FETCH_TXN_RECEIPTS_IN_BATCHES: false
-            # GRAPH_ETHEREUM_GENESIS_BLOCK_NUMBER: 13900982
         restart: unless-stopped
     ipfs:
         image: ipfs/go-ipfs:v0.10.0
