@@ -34,7 +34,7 @@ services:
         # ports:
         #     - '5001:5001'
         volumes:
-            - ./data/ipfs:/data/ipfs
+            - ipfs:/data/ipfs
         restart: unless-stopped
     postgres:
         image: postgres
@@ -55,7 +55,7 @@ services:
         restart: unless-stopped
 
 volumes:
-    # ipfs:
+    ipfs:
     pgdata:
 
 networks:
