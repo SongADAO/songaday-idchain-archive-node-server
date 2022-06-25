@@ -1,0 +1,50 @@
+specVersion: 0.0.2
+schema:
+  file: songaday.schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: erc721
+    network: mainnet
+    source:
+      address: "0x19b703f65aa7e1e775bd06c2aa0d0d08c80f1c45"
+      abi: IERC721
+      startBlock: 13900982
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ERC721Contract
+      abis:
+        - name: IERC721
+          file: ../node_modules/@openzeppelin/contracts/build/contracts/IERC721Metadata.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ../node_modules/@openzeppelin/subgraphs/src/datasources/erc721.ts
+  - kind: ethereum/contract
+    name: erc721ipfs
+    network: mainnet
+    source:
+      address: "0x19b703f65aa7e1e775bd06c2aa0d0d08c80f1c45"
+      abi: IERC721
+      startBlock: 13900982
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ERC721TokenIpfsMetadata
+        - ERC721ContractIpfsMetadata
+        - ERC721TokenTrait
+      abis:
+        - name: IERC721
+          file: ../node_modules/@openzeppelin/contracts/build/contracts/IERC721Metadata.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ../subgraph/datasources/erc721ipfs.ts
