@@ -8,6 +8,7 @@
     "compile": "graph-compiler --config configs/songaday.json --include node_modules/@openzeppelin/subgraphs/src/datasources subgraph/datasources --export-schema --export-subgraph",
     "codegen": "graph codegen ./generated/songaday.subgraph.yaml",
     "build": "graph build ./generated/songaday.subgraph.yaml",
+    "pin": "sh ./pin-ipfs.sh",
     "create": "graph create generated/songaday --node http://graph-node:8020",
     "deploy": "graph deploy --ipfs http://ipfs:5001 --node http://graph-node:8020 generated/songaday ./generated/songaday.subgraph.yaml"
   },
