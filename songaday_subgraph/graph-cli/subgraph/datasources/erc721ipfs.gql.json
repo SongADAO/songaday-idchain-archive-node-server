@@ -7,10 +7,10 @@
     "name": "ERC721TokenAttribute",
     "fields": [
       { "name": "metadata", "type": "ERC721TokenMetadata!" },
-      { "name": "traitType", "type": "String!" },
+      { "name": "trait_type", "type": "String!" },
       { "name": "value", "type": "String!" },
-      { "name": "maxValue", "type": "BigInt" },
-      { "name": "displayType", "type": "String" }
+      { "name": "max_value", "type": "BigInt" },
+      { "name": "display_type", "type": "String" }
     ]
   },
   {

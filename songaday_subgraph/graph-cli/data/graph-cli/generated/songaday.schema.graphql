@@ -48,10 +48,10 @@ type ERC721Transfer implements Event @entity(immutable: true) {
 type ERC721TokenAttribute @entity {
 	id: ID!
 	metadata: ERC721TokenMetadata!
-	traitType: String!
+	trait_type: String!
 	value: String!
-	maxValue: BigInt
-	displayType: String
+	max_value: BigInt
+	display_type: String
 }
 type ERC721TokenMetadata @entity {
 	id: ID!

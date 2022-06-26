@@ -60,7 +60,7 @@ export function fetchERC721TokenIpfsMetadata(
                 attribute.metadata = metadata.id;
 
                 const traitType = attributeData.get('trait_type');
-                attribute.traitType = traitType ? traitType.toString() : '';
+                attribute.trait_type = traitType ? traitType.toString() : '';
 
                 const value = attributeData.get('value');
                 if (value && value.kind == JSONValueKind.STRING) {
@@ -70,10 +70,10 @@ export function fetchERC721TokenIpfsMetadata(
                 }
 
                 const maxValue = attributeData.get('max_value');
-                attribute.maxValue = maxValue ? maxValue.toBigInt() : null;
+                attribute.max_value = maxValue ? maxValue.toBigInt() : null;
 
                 const displayType = attributeData.get('display_type');
-                attribute.displayType = displayType ? displayType.toString() : null;
+                attribute.display_type = displayType ? displayType.toString() : null;
 
                 attribute.save();
               }
