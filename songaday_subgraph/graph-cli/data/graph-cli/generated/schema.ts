@@ -543,13 +543,13 @@ export class ERC721TokenAttribute extends Entity {
     this.set("metadata", Value.fromString(value));
   }
 
-  get traitType(): string {
-    let value = this.get("traitType");
+  get trait_type(): string {
+    let value = this.get("trait_type");
     return value!.toString();
   }
 
-  set traitType(value: string) {
-    this.set("traitType", Value.fromString(value));
+  set trait_type(value: string) {
+    this.set("trait_type", Value.fromString(value));
   }
 
   get value(): string {
@@ -561,8 +561,8 @@ export class ERC721TokenAttribute extends Entity {
     this.set("value", Value.fromString(value));
   }
 
-  get maxValue(): BigInt | null {
-    let value = this.get("maxValue");
+  get max_value(): BigInt | null {
+    let value = this.get("max_value");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -570,16 +570,16 @@ export class ERC721TokenAttribute extends Entity {
     }
   }
 
-  set maxValue(value: BigInt | null) {
+  set max_value(value: BigInt | null) {
     if (!value) {
-      this.unset("maxValue");
+      this.unset("max_value");
     } else {
-      this.set("maxValue", Value.fromBigInt(<BigInt>value));
+      this.set("max_value", Value.fromBigInt(<BigInt>value));
     }
   }
 
-  get displayType(): string | null {
-    let value = this.get("displayType");
+  get display_type(): string | null {
+    let value = this.get("display_type");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -587,11 +587,11 @@ export class ERC721TokenAttribute extends Entity {
     }
   }
 
-  set displayType(value: string | null) {
+  set display_type(value: string | null) {
     if (!value) {
-      this.unset("displayType");
+      this.unset("display_type");
     } else {
-      this.set("displayType", Value.fromString(<string>value));
+      this.set("display_type", Value.fromString(<string>value));
     }
   }
 }
