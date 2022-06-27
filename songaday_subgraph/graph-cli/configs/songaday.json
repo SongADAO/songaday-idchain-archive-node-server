@@ -5,7 +5,7 @@
     {
       "address": "0x19b703f65aa7e1e775bd06c2aa0d0d08c80f1c45",
       "startBlock": 13900982,
-      "module": ["erc721", "erc721ipfs"]
+      "module": ["erc721", "erc721ipfs", "erc721balance"]
     }
   ]
 }
