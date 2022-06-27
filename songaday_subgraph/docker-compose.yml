@@ -36,7 +36,7 @@ services:
             - ipfs:/data/ipfs
         restart: unless-stopped
     postgres:
-        image: postgres
+        image: postgres:14
         # ports:
         #     - '5432:5432'
         command:
