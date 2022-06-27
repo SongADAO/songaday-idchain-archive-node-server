@@ -6,6 +6,7 @@ type Account @entity {
 	ERC721operatorOperator: [ERC721Operator!]! @derivedFrom(field: "operator")
 	ERC721transferFromEvent: [ERC721Transfer!]! @derivedFrom(field: "from")
 	ERC721transferToEvent: [ERC721Transfer!]! @derivedFrom(field: "to")
+	ERC721balances: [ERC721Balance!]! @derivedFrom(field: "account")
 	events: [Event!]! @derivedFrom(field: "emitter")
 }
 type ERC721Contract @entity(immutable: true) {
@@ -63,6 +64,13 @@ type ERC721TokenMetadata @entity {
 	external_url: String
 	youtube_url: String
 	attributes: [ERC721TokenAttribute!]! @derivedFrom(field: "metadata")
+}
+type ERC721Balance @entity {
+	id: ID!
+	contract: ERC721Contract!
+	account: Account
+	value: BigDecimal!
+	valueExact: BigInt!
 }
 interface Event {
 	id: ID!
