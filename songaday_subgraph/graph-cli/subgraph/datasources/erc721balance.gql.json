@@ -1,0 +1,28 @@
+[
+	{
+		"name": "Account",
+		"fields": [
+			{ "name": "id",                      "type": "Bytes!"                                 },
+			{ "name": "asERC721",                "type": "ERC721Contract"                         },
+			{ "name": "ERC721tokens",            "type": "ERC721Token!",    "derived": "owner"    },
+			{ "name": "ERC721operatorOwner",     "type": "ERC721Operator!", "derived": "owner"    },
+			{ "name": "ERC721operatorOperator",  "type": "ERC721Operator!", "derived": "operator" },
+			{ "name": "ERC721transferFromEvent", "type": "ERC721Transfer!", "derived": "from"     },
+			{ "name": "ERC721transferToEvent",   "type": "ERC721Transfer!", "derived": "to"       },
+			{
+				"name": "ERC721balances",
+				"type": "ERC721Balance!",
+				"derived": "account"
+			}
+		]
+	},
+	{
+		"name": "ERC721Balance",
+		"fields": [
+			{ "name": "contract", "type": "ERC721Contract!" },
+			{ "name": "account", "type": "Account" },
+			{ "name": "value", "type": "BigDecimal!" },
+			{ "name": "valueExact", "type": "BigInt!" }
+		]
+	}
+]
