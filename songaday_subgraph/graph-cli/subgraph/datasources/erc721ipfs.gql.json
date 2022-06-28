@@ -7,6 +7,7 @@
     "name": "ERC721TokenAttribute",
     "fields": [
       { "name": "metadata", "type": "ERC721TokenMetadata!" },
+      { "name": "token_trait_value", "type": "ERC721TokenTraitValue" },
       { "name": "trait_type", "type": "String!" },
       { "name": "value", "type": "String!" },
       { "name": "max_value", "type": "BigInt" },
@@ -23,7 +24,32 @@
       { "name": "animation_url", "type": "String" },
       { "name": "external_url", "type": "String" },
       { "name": "youtube_url", "type": "String" },
-      { "name": "attributes", "type": "ERC721TokenAttribute!", "derived": "metadata" }
+      {
+        "name": "attributes",
+        "type": "ERC721TokenAttribute!",
+        "derived": "metadata"
+      }
+    ]
+  },
+  {
+    "name": "ERC721TokenTrait",
+    "fields": [
+      { "name": "trait_type", "type": "String!" },
+      { "name": "value_count", "type": "BigInt!" },
+      { "name": "values", "type": "ERC721TokenTraitValue!", "derived": "token_trait" },
+      { "name": "contract", "type": "ERC721Contract!" }
+    ]
+  },
+  {
+    "name": "ERC721TokenTraitValue",
+    "fields": [
+      { "name": "attributes", "type": "ERC721TokenAttribute!", "derived": "token_trait_value" },
+      { "name": "token_trait", "type": "ERC721TokenTrait!" },
+      { "name": "token_count", "type": "BigInt!" },
+      { "name": "value", "type": "String!" },
+      { "name": "max_value", "type": "BigInt" },
+      { "name": "display_type", "type": "String" },
+      { "name": "contract", "type": "ERC721Contract!" }
     ]
   }
 ]

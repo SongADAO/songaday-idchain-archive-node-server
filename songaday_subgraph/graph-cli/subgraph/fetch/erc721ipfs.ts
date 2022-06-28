@@ -1,7 +1,8 @@
 import { Address, Bytes, ipfs, json, JSONValueKind } from '@graphprotocol/graph-ts';
+import { constants } from "@amxx/graphprotocol-utils";
 import { IERC721 } from '@openzeppelin/subgraphs/generated/erc721/IERC721';
 import { ERC721Contract } from '@openzeppelin/subgraphs/generated/schema';
-import { ERC721Token, ERC721TokenAttribute, ERC721TokenMetadata } from '../../generated/schema';
+import { ERC721Token, ERC721TokenAttribute, ERC721TokenMetadata, ERC721TokenTrait, ERC721TokenTraitValue } from '../../generated/schema';
 
 export function fetchERC721TokenIpfsMetadata(
   contractId: string,
@@ -53,6 +54,7 @@ export function fetchERC721TokenIpfsMetadata(
             const attributesArray = attributes.toArray();
             for (let i = 0; i < attributesArray.length; i++) {
               const attributeId = metadata.id.concat('/').concat(i.toString());
+
               let attribute = ERC721TokenAttribute.load(attributeId);
               if (attribute == null && attributesArray[i].kind == JSONValueKind.OBJECT) {
                 const attributeData = attributesArray[i].toObject();
@@ -76,6 +78,46 @@ export function fetchERC721TokenIpfsMetadata(
                 attribute.display_type = displayType ? displayType.toString() : null;
 
                 attribute.save();
+              }
+
+              if (attribute != null && attribute.trait_type) {
+                const traitId = contract.id.toHex().concat('/').concat(attribute.trait_type.toLowerCase());
+
+                let trait = ERC721TokenTrait.load(traitId);
+                if (trait == null) {
+                  trait = new ERC721TokenTrait(traitId);
+                  trait.contract = contract.id;
+                  trait.trait_type = attribute.trait_type;
+                  trait.value_count = constants.BIGINT_ZERO;
+                  trait.save();
+                }
+
+                if (trait != null && attribute.value) {
+                  const traitValueId = trait.id.concat('/').concat(attribute.value.toLowerCase());
+
+                  let traitValue = ERC721TokenTraitValue.load(traitValueId);
+                  if (traitValue == null) {
+                    traitValue = new ERC721TokenTraitValue(traitValueId);
+                    traitValue.contract = contract.id;
+                    traitValue.token_trait = trait.id;
+                    traitValue.value = attribute.value;
+                    traitValue.max_value = attribute.max_value;
+                    traitValue.display_type = attribute.display_type;
+                    traitValue.token_count = constants.BIGINT_ZERO;
+                    traitValue.save();
+
+                    trait.value_count = trait.value_count.plus(constants.BIGINT_ONE);
+                    trait.save();
+                  }
+
+                  if (traitValue != null) {
+                    traitValue.token_count = traitValue.token_count.plus(constants.BIGINT_ONE);
+                    traitValue.save();
+
+                    attribute.token_trait_value = traitValue.id;
+                    attribute.save();
+                  }
+                }
               }
             }
           }
