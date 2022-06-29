@@ -552,6 +552,23 @@ export class ERC721TokenAttribute extends Entity {
     this.set("metadata", Value.fromString(value));
   }
 
+  get token_trait_value(): string | null {
+    let value = this.get("token_trait_value");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set token_trait_value(value: string | null) {
+    if (!value) {
+      this.unset("token_trait_value");
+    } else {
+      this.set("token_trait_value", Value.fromString(<string>value));
+    }
+  }
+
   get trait_type(): string {
     let value = this.get("trait_type");
     return value!.toString();
@@ -764,6 +781,192 @@ export class ERC721TokenMetadata extends Entity {
 
   set attributes(value: Array<string>) {
     this.set("attributes", Value.fromStringArray(value));
+  }
+}
+
+export class ERC721TokenTrait extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ERC721TokenTrait entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ERC721TokenTrait must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ERC721TokenTrait", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ERC721TokenTrait | null {
+    return changetype<ERC721TokenTrait | null>(
+      store.get("ERC721TokenTrait", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get trait_type(): string {
+    let value = this.get("trait_type");
+    return value!.toString();
+  }
+
+  set trait_type(value: string) {
+    this.set("trait_type", Value.fromString(value));
+  }
+
+  get value_count(): BigInt {
+    let value = this.get("value_count");
+    return value!.toBigInt();
+  }
+
+  set value_count(value: BigInt) {
+    this.set("value_count", Value.fromBigInt(value));
+  }
+
+  get values(): Array<string> {
+    let value = this.get("values");
+    return value!.toStringArray();
+  }
+
+  set values(value: Array<string>) {
+    this.set("values", Value.fromStringArray(value));
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    return value!.toBytes();
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
+  }
+}
+
+export class ERC721TokenTraitValue extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save ERC721TokenTraitValue entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ERC721TokenTraitValue must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ERC721TokenTraitValue", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ERC721TokenTraitValue | null {
+    return changetype<ERC721TokenTraitValue | null>(
+      store.get("ERC721TokenTraitValue", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get attributes(): Array<string> {
+    let value = this.get("attributes");
+    return value!.toStringArray();
+  }
+
+  set attributes(value: Array<string>) {
+    this.set("attributes", Value.fromStringArray(value));
+  }
+
+  get token_trait(): string {
+    let value = this.get("token_trait");
+    return value!.toString();
+  }
+
+  set token_trait(value: string) {
+    this.set("token_trait", Value.fromString(value));
+  }
+
+  get token_count(): BigInt {
+    let value = this.get("token_count");
+    return value!.toBigInt();
+  }
+
+  set token_count(value: BigInt) {
+    this.set("token_count", Value.fromBigInt(value));
+  }
+
+  get value(): string {
+    let value = this.get("value");
+    return value!.toString();
+  }
+
+  set value(value: string) {
+    this.set("value", Value.fromString(value));
+  }
+
+  get max_value(): BigInt | null {
+    let value = this.get("max_value");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set max_value(value: BigInt | null) {
+    if (!value) {
+      this.unset("max_value");
+    } else {
+      this.set("max_value", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get display_type(): string | null {
+    let value = this.get("display_type");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set display_type(value: string | null) {
+    if (!value) {
+      this.unset("display_type");
+    } else {
+      this.set("display_type", Value.fromString(<string>value));
+    }
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    return value!.toBytes();
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
   }
 }
 

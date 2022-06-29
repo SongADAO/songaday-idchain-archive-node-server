@@ -49,6 +49,7 @@ type ERC721Transfer implements Event @entity(immutable: true) {
 type ERC721TokenAttribute @entity {
 	id: ID!
 	metadata: ERC721TokenMetadata!
+	token_trait_value: ERC721TokenTraitValue
 	trait_type: String!
 	value: String!
 	max_value: BigInt
@@ -64,6 +65,23 @@ type ERC721TokenMetadata @entity {
 	external_url: String
 	youtube_url: String
 	attributes: [ERC721TokenAttribute!]! @derivedFrom(field: "metadata")
+}
+type ERC721TokenTrait @entity {
+	id: ID!
+	trait_type: String!
+	value_count: BigInt!
+	values: [ERC721TokenTraitValue!]! @derivedFrom(field: "token_trait")
+	contract: ERC721Contract!
+}
+type ERC721TokenTraitValue @entity {
+	id: ID!
+	attributes: [ERC721TokenAttribute!]! @derivedFrom(field: "token_trait_value")
+	token_trait: ERC721TokenTrait!
+	token_count: BigInt!
+	value: String!
+	max_value: BigInt
+	display_type: String
+	contract: ERC721Contract!
 }
 type ERC721Balance @entity {
 	id: ID!
