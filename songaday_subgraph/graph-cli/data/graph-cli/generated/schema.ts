@@ -104,6 +104,15 @@ export class Account extends Entity {
     this.set("ERC721transferToEvent", Value.fromStringArray(value));
   }
 
+  get ERC721balances(): Array<string> {
+    let value = this.get("ERC721balances");
+    return value!.toStringArray();
+  }
+
+  set ERC721balances(value: Array<string>) {
+    this.set("ERC721balances", Value.fromStringArray(value));
+  }
+
   get events(): Array<string> {
     let value = this.get("events");
     return value!.toStringArray();
@@ -755,6 +764,82 @@ export class ERC721TokenMetadata extends Entity {
 
   set attributes(value: Array<string>) {
     this.set("attributes", Value.fromStringArray(value));
+  }
+}
+
+export class ERC721Balance extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ERC721Balance entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ERC721Balance must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ERC721Balance", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ERC721Balance | null {
+    return changetype<ERC721Balance | null>(store.get("ERC721Balance", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    return value!.toBytes();
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
+  }
+
+  get account(): Bytes | null {
+    let value = this.get("account");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set account(value: Bytes | null) {
+    if (!value) {
+      this.unset("account");
+    } else {
+      this.set("account", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get value(): BigDecimal {
+    let value = this.get("value");
+    return value!.toBigDecimal();
+  }
+
+  set value(value: BigDecimal) {
+    this.set("value", Value.fromBigDecimal(value));
+  }
+
+  get valueExact(): BigInt {
+    let value = this.get("valueExact");
+    return value!.toBigInt();
+  }
+
+  set valueExact(value: BigInt) {
+    this.set("valueExact", Value.fromBigInt(value));
   }
 }
 
