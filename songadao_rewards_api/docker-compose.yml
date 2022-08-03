@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+    songadao_rewards_api:
+        image: 'songadao/rewardsapi:1.0'
+        env_file:
+            - .env
+        restart: unless-stopped
+
+networks:
+    default:
+        name: sad_external_http
+        external: true
