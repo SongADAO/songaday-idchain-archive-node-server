@@ -28,7 +28,10 @@ services:
             GRAPH_LOG: info
             GRAPH_ALLOW_NON_DETERMINISTIC_IPFS: "true"
             # GRAPH_ETHEREUM_BLOCK_INGESTOR_MAX_CONCURRENT_JSON_RPC_CALLS_FOR_TXN_RECEIPTS: 1
-        # restart: unless-stopped
+        logging:
+          options:
+            max-size: "10m"
+        restart: unless-stopped
     ipfs:
         image: ipfs/go-ipfs:v0.10.0
         # ports:
