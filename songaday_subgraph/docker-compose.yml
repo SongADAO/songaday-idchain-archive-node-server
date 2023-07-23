@@ -6,7 +6,7 @@ services:
         volumes:
             - ./data/graph-cli/generated:/usr/src/app/generated
     graph-node:
-        image: graphprotocol/graph-node
+        image: graphprotocol/graph-node:v0.27.0
         # ports:
         #     - '8000:8000'
         #     - '8001:8001'
